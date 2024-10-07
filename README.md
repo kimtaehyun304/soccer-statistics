@@ -10,9 +10,9 @@ SSS는 축구 4대 리그 기록을 볼 수 있는 웹 사이트입니다. 축�
 # 프로젝트 스택
 ## 프론트엔드: mui, react, typescript
 
-## 백엔드: spring(boot & security), gradle, jpa, jwt, swagger
+## 백엔드: spring(boot & security), gradle, jpa, jwt
 
-## 기타: aws(ec2 & rds & route53), let`s encrypt, netlify, iteasy(도메인 구매)
+## 기타: aws(ec2 & rds & route53), let`s encrypt, netlify, iteasy(도메인 구매), swagger, logback
 
 # 프로젝트 사진
 검색페이지 - 홈
