@@ -62,6 +62,7 @@ public class ScheduledTasks {
     @Value("${rapidApiKey}")
     private String rapidApiKey;
 
+    // 연합 뉴스 크롤링
     @Scheduled(cron = "0 0 13 ? * *", zone = "Asia/Seoul")
     public void saveCrawlingNews() {
         //log.info("saveCrawlingNews 메서드 실행");
