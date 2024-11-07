@@ -3,17 +3,47 @@
 프톤트 배포: https://dlsss.netlify.app/   
 API 서버: https://dldm.kr/swagger-ui/index.html
 
-# 프로젝트 소개
+## 소개
 SSS는 축구 4대 리그 기록을 볼 수 있는 웹 사이트입니다. 축구 데이터는 rapidApi-API-FOOTBALL에서 가져왔습니다.  
 이 데이터를 통해 선수 프로필, 팀 전적, 랭킹을 조회하는 기능을 만들었습니다.  
 
+# 팀원 
+총 4명으로 이루어진 팀 입니다. 저는 백엔드와 프로젝트 통합,배포를 맡았습니다.  
+(팀장) 
+
+
+# 개발 기간
+2024-09-10 ~ 
+
 # 프로젝트 스택
 ## 프론트엔드: mui, react, typescript
+*netlify
 
-## 백엔드: spring(boot & security), gradle, jpa, jwt, swagger, logback
+## 백엔드: spring(boot & security), jpa
+*jwt, swagger, logback, gradle  
+*aws(ec2 & rds & route53), iteasy, let`s encrypt  
 
-## 배포: aws(ec2 & rds & route53), iteasy, let`s encrypt, netlify
-# 프로젝트 사진
+# 설계
+[스프링 시큐리티]  
+SecurityFilterChain이 제공하는 기본 보안 설정을 사용했습니다.  
+
+[화면]  
+스프링 MVC(API)와 react로 설계했습니다. url을 restful하게 지었습니다.  
+
+[디자인]  
+Mui을 사용해 반응형 웹으로 만들었습니다.    
+
+[DB]   
+MySql-rds, JPA로 설계했습니다.  
+
+## 로직
+[회원가입, 로그인]  
+비밀번호를 Bcrypt로 해싱하여 db에 저장합니다.  
+
+
+
+
+## 디자인 미리보기
 검색페이지 - 홈
 
 ![home](https://github.com/user-attachments/assets/bb847464-6c4d-435a-9b5e-f348c8b05fe3)
