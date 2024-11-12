@@ -17,10 +17,10 @@ SSS는 축구 4대 리그 기록을 볼 수 있는 웹 사이트입니다. 축�
 2024-09-10 ~ 
 
 # 프로젝트 스택
-## 프론트엔드: mui, react, typescript
+## 프론트엔드: mui, react 18, typescript
 *netlify
 
-## 백엔드: spring(boot & security), jpa
+## 백엔드: spring(boot 3 & security 6), hibernate 6
 *jwt, swagger, logback, gradle  
 *aws(ec2 & rds & route53), iteasy, let`s encrypt  
 
