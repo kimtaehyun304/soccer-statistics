@@ -1,7 +1,6 @@
 # 2학기 캡스톤 디자인 수업 - SSS
 
-프톤트 배포: https://dlsss.netlify.app/   
-API 서버: https://dldm.kr/swagger-ui/index.html
+배포 중단
 
 ## 소개
 SSS는 축구 4대 리그 기록을 볼 수 있는 웹 사이트입니다. 축구 데이터는 rapidApi-API-FOOTBALL에서 가져왔습니다.  
