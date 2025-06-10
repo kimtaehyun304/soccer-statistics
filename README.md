@@ -1,6 +1,6 @@
 # 소개
-sss(soccer-statistics)는 축구 4대 리그 플랫폼입니다. 선수, 팀의 전적 / 통계 / 랭킹을 제공합니다.  
-데이터는 rapidApi-API-FOOTBALL에서 가져왔습니다. (배포 중단)  
+sss(soccer-statistics)는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전적, 통계, 랭킹을 제공합니다.  
+데이터는 외부(rapidApi)에서 가져왔습니다. (배포 중단)  
 
 본인 역할 (팀원 4명)  
 저는 혼자 백엔드를 맡고, 프론트는 홈, 회원가입/로그인을 맡았습니다.  
@@ -10,7 +10,7 @@ sss(soccer-statistics)는 축구 4대 리그 플랫폼입니다. 선수, 팀의 
 
 프로젝트 스택  
 react18 / typeScript / mui  
-spring(boot3 / security6) / hibernate 6
+spring (boot3 / security6) / hibernate 6
 
 기능  
 <ul>
