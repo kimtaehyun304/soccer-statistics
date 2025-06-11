@@ -25,34 +25,44 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
     <li>연합뉴스 크롤링하여 db에 저장</li>
 </ul>
 
+### 개선
+<ul>
+  <li>
+    지금 코드는 bindingResult 사용 중 → 공통 예외처리로 바꾸자
+  </li>
+</ul>
 
 
 ### UI/UX
-검색페이지 - 홈
+<h4 align="center">검색 페이지</h4>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/bb847464-6c4d-435a-9b5e-f348c8b05fe3" width="70%" height="70%"/>
+</p>
 
-![home](https://github.com/user-attachments/assets/bb847464-6c4d-435a-9b5e-f348c8b05fe3)
+<h4 align="center">선수 상세보기</h4>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/2631c496-45f2-46f2-81e3-68d3f46736be" width="70%" height="70%"/>
+</p>
 
-선수 상세보기
+<h4 align="center">팀 상세보기</h4>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/455c18c9-117a-475c-936e-c08e0f6a4404" width="70%" height="70%"/>
+</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/958fa288-a3d9-4f81-9ff8-faf999844266" width="70%" height="70%"/>
+</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/3f5044f1-5616-4792-98d8-5b1e9c2a41e9" width="70%" height="70%"/>
+</p>
 
-![player](https://github.com/user-attachments/assets/2631c496-45f2-46f2-81e3-68d3f46736be)
+<h4 align="center">랭킹</h4>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/9599ebd9-ac84-4cf2-8915-7620ef7267ec" width="70%" height="70%"/>
+</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/3e2fef81-c90b-4cfb-8e6a-17418fbacb94" width="70%" height="70%"/>
+</p>
 
-팀 상세보기
 
-![team1](https://github.com/user-attachments/assets/455c18c9-117a-475c-936e-c08e0f6a4404)
-![team2](https://github.com/user-attachments/assets/958fa288-a3d9-4f81-9ff8-faf999844266)
-
-댓글
-
-![comment](https://github.com/user-attachments/assets/3f5044f1-5616-4792-98d8-5b1e9c2a41e9)
-
-랭킹
-
-![선수 랭킹](https://github.com/user-attachments/assets/9599ebd9-ac84-4cf2-8915-7620ef7267ec)
-![팀 랭킹](https://github.com/user-attachments/assets/3e2fef81-c90b-4cfb-8e6a-17418fbacb94)
-
-로그인 & 회원가입
-
-![로그인](https://github.com/user-attachments/assets/01c32c59-0028-475a-988b-c1201a79d16e)
-![회원가입](https://github.com/user-attachments/assets/19939de5-11da-4755-9888-4f5d91cd5f55)
 
 
