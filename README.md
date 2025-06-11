@@ -12,7 +12,7 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
 프로젝트 스택  
 <ul>
   <li>react18 / typeScript / mui  </li>
-  <li>spring (boot3 / security6) / hibernate 6</li>
+  <li>spring (boot3 / security6) / hibernate 6 / swagger</li>
 </ul>
 
 ### 어필
