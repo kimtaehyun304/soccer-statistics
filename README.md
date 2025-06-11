@@ -17,12 +17,12 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
 
 ### 어필
 <ul>
-  <li>연합뉴스 크롤링하여 db에 저장</li>
   <li>
     매일 rapid api 호출하여 데이터 갱신 (@Schedule)<br>
     → EC2 시간이 UTC로 돼있어서 의도치 않은 시간에 @Schedule 동작<br>
     → KST로 변경
   </li>
+    <li>연합뉴스 크롤링하여 db에 저장</li>
 </ul>
 
 
