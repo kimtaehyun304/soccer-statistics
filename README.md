@@ -23,7 +23,7 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
     → EC2 시간이 UTC로 돼있어서 의도치 않은 시간에 @Schedule 동작<br>
     → KST로 변경
   </li>
-    <li>연합뉴스 크롤링하여 db에 저장</li>
+    <li>연합뉴스 크롤링하여 db에 저장 (@Schedule)</li>
     <li>배치 작업 속도 개선 (RDS 통신 4H → 1H) </li>
       <ul>
         <li>중복 검사를 위해 팀 ID별로 DB를 개별 조회 -> 차집합 연산으로 DB에 없는 팀만 선별</li>
