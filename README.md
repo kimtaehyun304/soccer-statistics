@@ -38,6 +38,7 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
   </li>
   <li>react createBrowserRouter 사용 → 다른 프로젝트할 땐 vite로 파일 기반 라우팅 쓰자</li>
   <li>헤더, 푸터 컴포넌트 매번 사용 → 공통 레이아웃으로 대체하자</li>
+  <li>반복되는 try,catch문 → try,catch 미리 작업해둔 함수로 대체하자 try, </li>
 </ul>
 
 
