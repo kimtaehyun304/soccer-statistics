@@ -36,6 +36,7 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
     지금 코드는 bindingResult 사용 중 → 공통 예외처리로 바꾸자
   </li>
   <li>react createBrowserRouter 사용 → 다른 프로젝트할 땐 vite로 파일 기반 라우팅 쓰자</li>
+  <li>헤더, 푸터 컴포넌트 매번 사용 → 공통 레이아웃으로 대체하자</li>
 </ul>
 
 
