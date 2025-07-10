@@ -6,7 +6,7 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
 
 
 본인 역할 (팀원 4명)  
-저는 혼자 백엔드를 맡고, 프론트는 홈, 회원가입/로그인을 맡았습니다.  
+저는 혼자 백엔드를 맡고, 프론트는 홈, 회원가입/로그인, 스쿼드를 맡고, 팀원이 맡은 페이지도 도왔습니다.
 
 개발 기간  
 2024-09-10 ~ 12-10
@@ -45,31 +45,31 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
 ### UI/UX
 <h4 align="center">검색 페이지</h4>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/bb847464-6c4d-435a-9b5e-f348c8b05fe3" width="70%" height="70%"/>
+<img src="https://github.com/user-attachments/assets/bb847464-6c4d-435a-9b5e-f348c8b05fe3" />
 </p>
 
 <h4 align="center">선수 상세보기</h4>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/2631c496-45f2-46f2-81e3-68d3f46736be" width="70%" height="70%"/>
+<img src="https://github.com/user-attachments/assets/2631c496-45f2-46f2-81e3-68d3f46736be" />
 </p>
 
 <h4 align="center">팀 상세보기</h4>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/455c18c9-117a-475c-936e-c08e0f6a4404" width="70%" height="70%"/>
+<img src="https://github.com/user-attachments/assets/455c18c9-117a-475c-936e-c08e0f6a4404" />
 </p>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/958fa288-a3d9-4f81-9ff8-faf999844266" width="70%" height="70%"/>
+<img src="https://github.com/user-attachments/assets/958fa288-a3d9-4f81-9ff8-faf999844266" />
 </p>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/3f5044f1-5616-4792-98d8-5b1e9c2a41e9" width="70%" height="70%"/>
+<img src="https://github.com/user-attachments/assets/3f5044f1-5616-4792-98d8-5b1e9c2a41e9" />
 </p>
 
 <h4 align="center">랭킹</h4>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/9599ebd9-ac84-4cf2-8915-7620ef7267ec" width="70%" height="70%"/>
+<img src="https://github.com/user-attachments/assets/9599ebd9-ac84-4cf2-8915-7620ef7267ec" />
 </p>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/3e2fef81-c90b-4cfb-8e6a-17418fbacb94" width="70%" height="70%"/>
+<img src="https://github.com/user-attachments/assets/3e2fef81-c90b-4cfb-8e6a-17418fbacb94" />
 </p>
 
 
