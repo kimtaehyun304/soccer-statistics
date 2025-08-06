@@ -12,24 +12,25 @@ soccer-statistics는 축구 4대 리그 플랫폼입니다. 선수와 팀의 전
 
 프로젝트 스택  
 <ul>
-  <li>react18 / typeScript / mui  </li>
-  <li>spring (boot3 / security6) / hibernate 6 / swagger</li>
+  <li>react18 / typeScript / mui </li>
+  <li>spring (boot3 / security6) / hibernate6 / swagger</li>
 </ul>
 
 ### 어필
+@Schedule을 통한 크론
 <ul>
-  <li>
-    매일 rapid api 호출하여 데이터 갱신 (@Schedule)<br>
-    → EC2 시간이 UTC로 돼있어서 의도치 않은 시간에 @Schedule 동작<br>
-    → KST로 변경
-  </li>
-    <li>연합뉴스 크롤링하여 db에 저장 (@Schedule)</li>
+  <li>매일 외부 api 100회 호출하여 db 2000건 수정</li>
+  <ul>
     <li>배치 작업 속도 개선 (RDS 통신 4H → 1H) </li>
+  </ul>
+  <li>연합뉴스 크롤링하여 db 저장</li>
+  
       <ul>
         <li>중복 검사를 위해 팀 ID별로 DB를 개별 조회 -> 차집합 연산으로 DB에 없는 팀만 선별</li>
       </ul>
 </ul>
-
+    → EC2 시간이 UTC로 돼있어서 의도치 않은 시간에 @Schedule 동작<br>
+    → KST로 변경
 ### 개선
 <ul>
   <li>
