@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -43,9 +44,9 @@ public class TeamRepository {
                 .getResultList();
     }
 
-    public List<Team> findAllById(Long id){
-        return em.createQuery("select t from Team t where t.id = :id", Team.class)
-                .setParameter("id", id)
+    public List<Team> findAllInId(Collection<Long> list){
+        return em.createQuery("select t from Team t where t.id in :list", Team.class)
+                .setParameter("list", list)
                 .getResultList();
     }
 
@@ -56,5 +57,13 @@ public class TeamRepository {
                 .getResultList();
     }
 
+    public Team findWithPlayersByTeamId(Long teamId){
+        List<Team> teams = em.createQuery("select t from Team t join fetch t.players " +
+                        "where t.id = :teamId", Team.class)
+                .setParameter("teamId", teamId)
+                .getResultList();
+
+        return teams.isEmpty() ? null : teams.get(0);
+    }
 
 }

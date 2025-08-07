@@ -7,6 +7,8 @@ public class PlayerRankingDto {
 
     private int ranking;
 
+    private Long playerId;
+
     private String photo;
 
     private String name;
@@ -15,11 +17,16 @@ public class PlayerRankingDto {
 
     private Double rating;
 
-    public PlayerRankingDto(String photo, String name, String position, Double rating) {
+    public PlayerRankingDto(Long playerId, String photo, String name, String position, Double rating) {
+        this.playerId = playerId;
         this.photo = photo;
         this.name = name;
         this.position = position;
         this.rating = rating;
+    }
+
+    public PlayerRankingDto(Long playerId) {
+        this.playerId = playerId;
     }
 
     /*

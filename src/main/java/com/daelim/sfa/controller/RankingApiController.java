@@ -1,10 +1,8 @@
 package com.daelim.sfa.controller;
 
-import com.daelim.sfa.dto.LeagueNameSeasonDto;
+import com.daelim.sfa.dto.LeagueIdSeasonDto;
 import com.daelim.sfa.dto.ranking.PlayerRankingDto;
 import com.daelim.sfa.dto.ranking.TeamRankingDto;
-import com.daelim.sfa.dto.search.player.AutoCompletePlayer;
-import com.daelim.sfa.dto.search.player.SearchPlayerDto;
 import com.daelim.sfa.repository.query.PlayerStatisticsQueryRepository;
 import com.daelim.sfa.repository.query.TeamStatisticsQueryRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +19,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,10 +32,10 @@ public class RankingApiController {
 
     @Operation(summary = "그래프 합계로 순위를 정하는 리그별 선수 랭킹 (1~100등)", description = "leagueName 생략시 리그를 구분하지 않습니다.")
     @Parameter(name = "leagueName", description = "리그 영문 이름", example = "Premier League, Serie A, Bundesliga, La Liga")
-    @Parameter(name = "leagueSeason", description = "", example = "only 2023")
+    @Parameter(name = "leagueSeason", description = "", example = "2023 or 2024")
     @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = PlayerRankingDto.class))))
     @GetMapping("/api/ranking/players")
-    public Object findPlayerRanking(@ModelAttribute @Valid LeagueNameSeasonDto leagueNameSeasonDto, BindingResult bindingResult){
+    public Object findPlayerRanking(@ModelAttribute @Valid LeagueIdSeasonDto leagueIdSeasonDto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()) {
             StringBuilder message = new StringBuilder();
@@ -47,7 +44,7 @@ public class RankingApiController {
             return new ResponseEntity<>(message.toString(), HttpStatus.BAD_REQUEST);
         }
 
-        List<PlayerRankingDto> playerRankingDtos = playerStatisticsQueryRepository.findAllByLeagueNameAndLeagueSeason(leagueNameSeasonDto.getLeagueName(), leagueNameSeasonDto.getLeagueSeason());
+        List<PlayerRankingDto> playerRankingDtos = playerStatisticsQueryRepository.findAllByLeagueIdAndLeagueSeason(leagueIdSeasonDto.getLeagueId(), leagueIdSeasonDto.getLeagueSeason());
 
         if(playerRankingDtos.isEmpty())
             return new ResponseEntity<>("조건에 맞는 검색 결과가 없습니다", HttpStatus.CONFLICT);
@@ -57,10 +54,10 @@ public class RankingApiController {
 
     @Operation(summary = "팀 랭킹(1~100등) 리스트 ", description = "")
     @Parameter(name = "leagueName", description = "리그 영문 이름", example = "Premier League, Serie A, Bundesliga, La Liga")
-    @Parameter(name = "leagueSeason", description = "", example = "only 2023")
+    @Parameter(name = "leagueSeason", description = "", example = "2023 or 2024")
     @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = TeamRankingDto.class))))
     @GetMapping("/api/ranking/teams")
-    public Object findTeamRanking(@ModelAttribute @Valid LeagueNameSeasonDto leagueNameSeasonDto, BindingResult bindingResult){
+    public Object findTeamRanking(@ModelAttribute @Valid LeagueIdSeasonDto leagueIdSeasonDto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()) {
             StringBuilder message = new StringBuilder();
@@ -69,7 +66,7 @@ public class RankingApiController {
             return new ResponseEntity<>(message.toString(), HttpStatus.BAD_REQUEST);
         }
 
-        List<TeamRankingDto> teamRankingDtos = teamStatisticsQueryRepository.findAllByLeagueNameAndLeagueSeason(leagueNameSeasonDto.getLeagueName(), leagueNameSeasonDto.getLeagueSeason());
+        List<TeamRankingDto> teamRankingDtos = teamStatisticsQueryRepository.findAllByLeagueNameAndLeagueSeason(leagueIdSeasonDto.getLeagueId(), leagueIdSeasonDto.getLeagueSeason());
 
         if(teamRankingDtos.isEmpty())
             return new ResponseEntity<>("조건에 맞는 검색 결과가 없습니다", HttpStatus.CONFLICT);

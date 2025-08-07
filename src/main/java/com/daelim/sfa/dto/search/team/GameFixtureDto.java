@@ -35,7 +35,7 @@ public class GameFixtureDto {
     public GameFixtureDto(GameFixture gameFixture, Team team) {
         referee = gameFixture.getReferee();
         timezone = gameFixture.getTimezone();
-        date = gameFixture.getDate();
+        date = gameFixture.getDate().toLocalDate();
 
         TeamDto team1 = new TeamDto(gameFixture.getTeam1(), gameFixture.getTeam1Goals());
         TeamDto team2 = new TeamDto(gameFixture.getTeam2(), gameFixture.getTeam2Goals());

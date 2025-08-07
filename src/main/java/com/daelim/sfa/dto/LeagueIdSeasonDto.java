@@ -7,14 +7,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LeagueNameSeasonDto {
+public class LeagueIdSeasonDto {
 
-    private String leagueName;
+    private Long leagueId;
 
     @NotNull
-    private int leagueSeason;
+    private Integer leagueSeason;
 
-    public LeagueNameSeasonDto() {
-        leagueSeason = 2024;
-    }
 }

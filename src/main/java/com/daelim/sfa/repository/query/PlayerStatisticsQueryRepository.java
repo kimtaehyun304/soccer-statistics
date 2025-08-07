@@ -51,11 +51,11 @@ public class PlayerStatisticsQueryRepository {
     */
 
     // rating으로 순위를 정함
-    public List<PlayerRankingDto> findAllByLeagueNameAndLeagueSeason(String leagueName, int leagueSeason){
+    public List<PlayerRankingDto> findAllByLeagueIdAndLeagueSeason(Long leagueId, int leagueSeason){
         List<PlayerRankingDto> PlayerRankings;
 
-        if (leagueName.equals("ALL League")){
-            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, ROUND(ps.rating, 2)) " +
+        if (leagueId == null){
+            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.id, p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, ROUND(ps.rating, 2)) " +
                             "from PlayerStatistics ps join ps.player p " +
                             "where ps.season =:leagueSeason " +
                             "order by (ps.rating) desc", PlayerRankingDto.class)
@@ -63,11 +63,11 @@ public class PlayerStatisticsQueryRepository {
                     .setMaxResults(100)
                     .getResultList();
         }else {
-            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, ROUND(ps.rating, 2)) " +
+            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.id, p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, ROUND(ps.rating, 2)) " +
                             "from PlayerStatistics ps join ps.player p " +
-                            "where ps.league.name = :leagueName and ps.season =:leagueSeason " +
+                            "where ps.league.id = :leagueId and ps.season =:leagueSeason " +
                             "order by (ps.rating) desc", PlayerRankingDto.class)
-                    .setParameter("leagueName", leagueName)
+                    .setParameter("leagueId", leagueId)
                     .setParameter("leagueSeason", leagueSeason)
                     .setMaxResults(100)
                     .getResultList();

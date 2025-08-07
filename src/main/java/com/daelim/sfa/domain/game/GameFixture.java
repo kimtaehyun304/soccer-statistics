@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class GameFixture {
     // UTC 등
     private String timezone;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     @JoinColumn(name = "venue_id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,15 +55,14 @@ public class GameFixture {
     private Team team2;
 
     @Column(name = "team1_goals")
-    private int team1Goals;
+    private Integer team1Goals;
 
     @Column(name = "team2_goals")
-    private int team2Goals;
+    private Integer team2Goals;
 
     @JoinColumn(name = "winner_team_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Team winnerTeam;
-
 
     /*
     @Embedded
@@ -71,7 +71,7 @@ public class GameFixture {
      */
 
     @Builder
-    public GameFixture(Long id, String referee, String timezone, LocalDate date, Venue venue, Team homeTeam, League league, int season, Team team1, Team team2, Team winnerTeam, int team1Goals, int team2Goals) {
+    public GameFixture(Long id, String referee, String timezone, LocalDateTime date, Venue venue, Team homeTeam, League league, int season, Team team1, Team team2, Team winnerTeam, Integer team1Goals, Integer team2Goals) {
         this.id = id;
         this.referee = referee;
         this.timezone = timezone;
@@ -87,7 +87,7 @@ public class GameFixture {
         this.team2Goals = team2Goals;
     }
 
-    public void updateFinishedGame(String referee, Team winnerTeam, int team1Goals, int team2Goals) {
+    public void updateFinishedGame(String referee, Team winnerTeam, Integer team1Goals, Integer team2Goals) {
         this.referee = referee;
         this.winnerTeam = winnerTeam;
         this.team1Goals = team1Goals;

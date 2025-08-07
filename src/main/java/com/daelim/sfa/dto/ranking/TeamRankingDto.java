@@ -8,6 +8,8 @@ public class TeamRankingDto {
 
     private int ranking;
 
+    private Long id;
+
     private String logo;
 
     private String name;
@@ -28,7 +30,8 @@ public class TeamRankingDto {
 
     private int points;
 
-    public TeamRankingDto(String logo, String name, int goals, int against, int played, int wins, int losses, int draws, int points) {
+    public TeamRankingDto(Long id, String logo, String name, int goals, int against, int played, int wins, int losses, int draws, int points) {
+        this.id = id;
         this.logo = logo;
         this.name = name;
         this.goals = goals;

@@ -6,7 +6,9 @@ import com.daelim.sfa.domain.player.Player;
 import com.daelim.sfa.domain.player.PlayerComment;
 import com.daelim.sfa.domain.team.Team;
 import com.daelim.sfa.domain.team.TeamComment;
-import com.daelim.sfa.dto.*;
+import com.daelim.sfa.dto.comment.RequestCommentDto;
+import com.daelim.sfa.dto.comment.ResponseCommentDto;
+import com.daelim.sfa.dto.comment.ResponseCountAndCommentDto;
 import com.daelim.sfa.repository.MemberRepository;
 import com.daelim.sfa.repository.player.PlayerCommentRepository;
 import com.daelim.sfa.repository.player.PlayerRepository;
@@ -19,7 +21,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -46,13 +47,13 @@ public class CommentApiController {
     private final MemberRepository  memberRepository;
     private final JwtAuth jwtAuth;
 
-    @Operation(summary = "특정 선수 댓글 조회", description = "영어로 검색하고 대소문자를 구분하지 않습니다.")
+    @Operation(summary = "특정 선수 댓글 조회", description = "선수 PK 로 검색합니다")
     @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(mediaType = "application/json" , schema = @Schema(implementation = ResponseCountAndCommentDto.class)))
-    @GetMapping("/api/players/{playerName}/comments")
+    @GetMapping("/api/players/{playerId}/comments")
     @ResponseBody
-    public Object findCommentByPlayerName(@PathVariable String playerName, @RequestParam(required = false, defaultValue = "1") int page) {
+    public Object findCommentByPlayerId(@PathVariable Long playerId, @RequestParam(required = false, defaultValue = "1") int page) {
 
-        Player player = playerRepository.findByName(playerName);
+        Player player = playerRepository.findById(playerId);
         int maxResults = 10;
         List<PlayerComment> playerComments = playerCommentRepository.findAllWithMemberByPlayerId(player.getId(), page, maxResults);
         int count = Math.toIntExact(playerCommentRepository.countByPlayerIdAndParentIdIsNull(player.getId()));
@@ -62,9 +63,9 @@ public class CommentApiController {
 
     @Operation(summary = "특정 선수 댓글 저장", description = "인증 헤더에 jwt를 넣어주세요. 리플을 저장하는 경우 부모 댓글 ID도 함께 넣어주세요")
     @ApiResponse(responseCode = "200", description = "저장 성공", content = @Content(mediaType = "application/json" , schema = @Schema(implementation = ResponseCommentDto.class)))
-    @PostMapping("/api/players/{playerName}/comments")
+    @PostMapping("/api/players/{playerId}/comments")
     @ResponseBody
-    public ResponseEntity<Object> saveComment(@PathVariable String playerName, @RequestBody @Valid RequestCommentDto requestCommentDto, BindingResult bindingResult, HttpServletRequest request) {
+    public ResponseEntity<Object> saveComment(@PathVariable Long playerId, @RequestBody @Valid RequestCommentDto requestCommentDto, BindingResult bindingResult, HttpServletRequest request) {
 
         String jws = request.getHeader("Authorization").replace("Bearer ", "");
 
@@ -84,7 +85,7 @@ public class CommentApiController {
             return new ResponseEntity<>(message.toString(), HttpStatus.CONFLICT);
         }
 
-        Player foundPlayer = playerRepository.findByName(playerName);
+        Player foundPlayer = playerRepository.findById(playerId);
         //Player player = new Player(foundPlayer.getId());
         PlayerComment parent = requestCommentDto.getParentId() == null ? null : new PlayerComment(requestCommentDto.getParentId());
         Member member = memberRepository.findById(memberId);
@@ -96,13 +97,13 @@ public class CommentApiController {
         return new ResponseEntity<>(responseCommentDto, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "특정 팀 댓글 조회", description = "영어로 검색하고 대소문자를 구분하지 않습니다.")
+    @Operation(summary = "특정 팀 댓글 조회", description = "팀 PK 로 검색합니다 ")
     @ApiResponse(responseCode = "200", description = "조회 성공", content = @Content(mediaType = "application/json" , schema = @Schema(implementation = ResponseCountAndCommentDto.class)))
-    @GetMapping("/api/teams/{teamName}/comments")
+    @GetMapping("/api/teams/{teamId}/comments")
     @ResponseBody
-    public Object findCommentByTeamName(@PathVariable String teamName, @RequestParam(required = false, defaultValue = "1") int page) {
+    public Object findCommentByTeamId(@PathVariable Long teamId, @RequestParam(required = false, defaultValue = "1") int page) {
 
-        Team team = teamRepository.findByName(teamName);
+        Team team = teamRepository.findById(teamId);
         int maxResults = 10;
 
         List<TeamComment> teamComments = teamCommentRepository.findAllWithMemberByTeamId(team.getId(), page, maxResults);
@@ -113,9 +114,9 @@ public class CommentApiController {
 
     @Operation(summary = "특정 팀 댓글 저장", description = "인증 헤더에 jwt를 넣어주세요. 리플을 저장하는 경우 부모 댓글 ID도 함께 넣어주세요")
     @ApiResponse(responseCode = "200", description = "저장 성공", content = @Content(mediaType = "application/json" , schema = @Schema(implementation = ResponseCommentDto.class)))
-    @PostMapping("/api/teams/{teamName}/comments")
+    @PostMapping("/api/teams/{teamId}/comments")
     @ResponseBody
-    public ResponseEntity<Object> saveTeamComment(@PathVariable String teamName, @RequestBody @Valid RequestCommentDto requestCommentDto, BindingResult bindingResult, HttpServletRequest request) {
+    public ResponseEntity<Object> saveTeamComment(@PathVariable Long teamId, @RequestBody @Valid RequestCommentDto requestCommentDto, BindingResult bindingResult, HttpServletRequest request) {
 
         String jws = request.getHeader("Authorization").replace("Bearer ", "");;
 
@@ -135,7 +136,7 @@ public class CommentApiController {
             return new ResponseEntity<>(message.toString(), HttpStatus.CONFLICT);
         }
 
-        Team foundTeam = teamRepository.findByName(teamName);
+        Team foundTeam = teamRepository.findById(teamId);
         TeamComment parent = requestCommentDto.getParentId() == null ? null : new TeamComment(requestCommentDto.getParentId());
         Member member = memberRepository.findById(memberId);
         TeamComment comment = TeamComment.builder().team(foundTeam).parent(parent).member(member).content(requestCommentDto.getContent()).createdAt(LocalDateTime.now()).updatedAt(LocalDateTime.now()).build();

@@ -15,23 +15,23 @@ public class TeamStatisticsQueryRepository {
 
     private final EntityManager em;
 
-    public List<TeamRankingDto> findAllByLeagueNameAndLeagueSeason(String leagueName, int leagueSeason) {
+    public List<TeamRankingDto> findAllByLeagueNameAndLeagueSeason(Long leagueId, int leagueSeason) {
         List<TeamRankingDto> teamRankings = new ArrayList<>();
 
-        if (leagueName == null) {
+        if (leagueId == null) {
             //teamRankings = em.createQuery("select new com.daelim.sfa.dto.ranking.TeamRankingDto(t.logo, t.name, ts.goals.forTotal, ts.goals.againstTotal, ts.fixtures.wins, ts.fixtures.losses, CONCAT(TRUNCATE(ts.fixtures.wins*100/ts.fixtures.played, 0), '%') ) " +
-            teamRankings = em.createQuery("select new com.daelim.sfa.dto.ranking.TeamRankingDto(t.logo, t.name, ts.goals.forTotal, ts.goals.againstTotal, ts.fixtures.played, ts.fixtures.wins, ts.fixtures.losses, ts.fixtures.draws, (ts.fixtures.wins*3)+ts.fixtures.draws)  " +
+            teamRankings = em.createQuery("select new com.daelim.sfa.dto.ranking.TeamRankingDto(t.id, t.logo, t.name, ts.goals.forTotal, ts.goals.againstTotal, ts.fixtures.played, ts.fixtures.wins, ts.fixtures.losses, ts.fixtures.draws, (ts.fixtures.wins*3)+ts.fixtures.draws)  " +
                             "from TeamStatistics ts join ts.team t " +
                             "where ts.season =:leagueSeason " +
                             "order by (ts.fixtures.wins*3)+ts.fixtures.draws desc", TeamRankingDto.class)
                     .setParameter("leagueSeason", leagueSeason)
                     .getResultList();
         } else {
-            teamRankings = em.createQuery("select new com.daelim.sfa.dto.ranking.TeamRankingDto(t.logo, t.name, ts.goals.forTotal, ts.goals.againstTotal, ts.fixtures.played, ts.fixtures.wins, ts.fixtures.losses, ts.fixtures.draws, (ts.fixtures.wins*3)+ts.fixtures.draws)  " +
+            teamRankings = em.createQuery("select new com.daelim.sfa.dto.ranking.TeamRankingDto(t.id, t.logo, t.name, ts.goals.forTotal, ts.goals.againstTotal, ts.fixtures.played, ts.fixtures.wins, ts.fixtures.losses, ts.fixtures.draws, (ts.fixtures.wins*3)+ts.fixtures.draws)  " +
                             "from TeamStatistics ts join ts.team t " +
-                            "where ts.league.name = :leagueName and ts.season =:leagueSeason " +
+                            "where ts.league.id = :leagueId and ts.season =:leagueSeason " +
                             "order by (ts.fixtures.wins*3)+ts.fixtures.draws desc", TeamRankingDto.class)
-                    .setParameter("leagueName", leagueName)
+                    .setParameter("leagueId", leagueId)
                     .setParameter("leagueSeason", leagueSeason)
                     .getResultList();
         }

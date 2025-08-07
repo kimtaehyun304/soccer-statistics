@@ -1,14 +1,20 @@
 package com.daelim.sfa.domain.player;
 
 import com.daelim.sfa.domain.team.Team;
+import com.daelim.sfa.domain.team.Venue;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Player {
 
     @Id
@@ -33,6 +39,27 @@ public class Player {
 
     private String photo;
 
+    // NULL 허용
+    @JoinColumn(name = "team_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Team team;
+
+    // players Squads 에서 조회
+    // NULL 허용
+    @Enumerated(EnumType.STRING)
+    private Position position;
+
+    private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "player")
+    private List<PlayerStatistics> statisticsList;
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
+
     public Player(Long id) {
         this.id = id;
     }
@@ -42,27 +69,16 @@ public class Player {
         this.lastName = lastName;
     }
 
-        /*
-    //private Boolean injured;
+    public void updateTeamAndPosition(Team team, Position position){
+        this.team = team;
+        this.position = position;
+        if(team != null) team.getPlayers().add(this);
+    }
 
-    // NULL 허용
-    @JoinColumn(name = "team_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Team team;
+    //private Boolean injured;
 
     // players Squads 에서 조회
     // NULL 허용
     //private Integer number;
-
-    // players Squads 에서 조회
-    // NULL 허용
-    //private String position;
-
-
-    public void addTeam(Team team){
-        this.team = team;
-    }
-
-     */
 
 }

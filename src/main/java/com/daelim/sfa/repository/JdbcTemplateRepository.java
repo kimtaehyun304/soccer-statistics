@@ -3,9 +3,9 @@ package com.daelim.sfa.repository;
 import com.daelim.sfa.domain.game.GameFixture;
 import com.daelim.sfa.domain.player.Player;
 import com.daelim.sfa.domain.player.PlayerStatistics;
+import com.daelim.sfa.domain.player.PlayerTransfer;
 import com.daelim.sfa.domain.team.Lineup;
 import com.daelim.sfa.domain.team.Team;
-import com.daelim.sfa.domain.team.TeamStatistics;
 import com.daelim.sfa.domain.team.Venue;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +16,14 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class InitRepository {
+public class JdbcTemplateRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -68,9 +70,10 @@ public class InitRepository {
         });
     }
 
+
     public void savePlayers(List<Player> players) {
 
-        jdbcTemplate.batchUpdate("INSERT INTO player(player_id, first_name, last_name, age, birth_date, birth_country, nationality, height, weight, photo) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", new BatchPreparedStatementSetter() {
+        jdbcTemplate.batchUpdate("INSERT INTO player(player_id, first_name, last_name, age, birth_date, birth_country, nationality, height, weight, photo, updated_at) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 ps.setLong(1, players.get(i).getId());
@@ -88,6 +91,7 @@ public class InitRepository {
                 ps.setString(8, players.get(i).getHeight());
                 ps.setString(9, players.get(i).getWeight());
                 ps.setString(10, players.get(i).getPhoto());
+                ps.setTimestamp(11, Timestamp.valueOf(LocalDateTime.now()));
 
                 //ps.setBoolean(10, players.get(i).isInjured());
                 // playerSquad 조회 로직에서 업데이트로 대신
@@ -101,6 +105,7 @@ public class InitRepository {
             }
         });
     }
+
 
     public void savePlayerStatistics(List<PlayerStatistics> PlayerStatisticsList) {
 
@@ -188,7 +193,7 @@ public class InitRepository {
                 ps.setLong(1, gameFixtures.get(i).getId());
                 ps.setString(2, gameFixtures.get(i).getReferee());
                 ps.setString(3, gameFixtures.get(i).getTimezone());
-                ps.setDate(4, Date.valueOf(gameFixtures.get(i).getDate()));
+                ps.setTimestamp(4, Timestamp.valueOf(gameFixtures.get(i).getDate()));
 
                 if(gameFixtures.get(i).getVenue().getId() == null)
                     ps.setNull(5, java.sql.Types.BIGINT);
@@ -200,8 +205,16 @@ public class InitRepository {
                 ps.setInt(8, gameFixtures.get(i).getSeason());
                 ps.setLong(9, gameFixtures.get(i).getTeam1().getId());
                 ps.setLong(10, gameFixtures.get(i).getTeam2().getId());
-                ps.setInt(11, gameFixtures.get(i).getTeam1Goals());
-                ps.setInt(12, gameFixtures.get(i).getTeam2Goals());
+
+                if(gameFixtures.get(i).getTeam1Goals() == null)
+                    ps.setNull(11, java.sql.Types.BIGINT);
+                else
+                    ps.setInt(11, gameFixtures.get(i).getTeam1Goals());
+
+                if(gameFixtures.get(i).getTeam1Goals() == null)
+                    ps.setNull(12, java.sql.Types.BIGINT);
+                else
+                    ps.setInt(12, gameFixtures.get(i).getTeam2Goals());
 
                 if(gameFixtures.get(i).getWinnerTeam().getId() == null)
                     ps.setNull(13, java.sql.Types.BIGINT);
@@ -215,5 +228,38 @@ public class InitRepository {
         });
     }
 
+    public void savePlayerTransfers(List<PlayerTransfer> playerTransfers) {
+
+        jdbcTemplate.batchUpdate("INSERT INTO player_transfer(player_id, date, type, in_team_id, out_team_id, updated_at) values (?, ?, ?, ?, ?, ?)", new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setLong(1, playerTransfers.get(i).getPlayer().getId());
+                LocalDate localDateDate = playerTransfers.get(i).getDate();
+
+                Date dateDate = null;
+                if (localDateDate != null)
+                    dateDate = Date.valueOf(localDateDate);
+                ps.setDate(2, dateDate);
+
+                ps.setString(3, playerTransfers.get(i).getType());
+
+                if(playerTransfers.get(i).getInTeam() == null)
+                    ps.setNull(4, java.sql.Types.BIGINT);
+                else
+                    ps.setLong(4, playerTransfers.get(i).getInTeam().getId());
+
+                if(playerTransfers.get(i).getOutTeam() == null)
+                    ps.setNull(5, java.sql.Types.BIGINT);
+                else
+                    ps.setLong(5, playerTransfers.get(i).getOutTeam().getId());
+
+                ps.setTimestamp(6, Timestamp.valueOf(playerTransfers.get(i).getUpdatedAt()));
+            }
+            @Override
+            public int getBatchSize() {
+                return playerTransfers.size();
+            }
+        });
+    }
 
 }

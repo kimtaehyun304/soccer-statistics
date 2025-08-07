@@ -19,7 +19,6 @@ public class TeamStatisticsService {
     private final TeamStatisticsRepository teamStatisticsRepository;
 
     public Long updateTeamStatistics(Long teamStatisticsId, Fixtures fixtures, TeamStatisticsGoals goals, Cards cards) {
-        //log.info("updateTeamStatistics 메서드 실행");
         TeamStatistics foundTeamStatistics = teamStatisticsRepository.findById(teamStatisticsId);
         foundTeamStatistics.updateTeamStatistics(fixtures, goals, cards);
         return foundTeamStatistics.getId();
