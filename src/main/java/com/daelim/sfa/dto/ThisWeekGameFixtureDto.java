@@ -4,7 +4,6 @@ import com.daelim.sfa.domain.game.GameFixture;
 import com.daelim.sfa.dto.team.TeamDto;
 import lombok.Getter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter

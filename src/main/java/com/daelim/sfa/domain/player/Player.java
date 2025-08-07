@@ -1,7 +1,7 @@
 package com.daelim.sfa.domain.player;
 
 import com.daelim.sfa.domain.team.Team;
-import com.daelim.sfa.domain.team.Venue;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.List;
 public class Player {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //API 스펙에서 제공하는 숫자로 PK 사용
     @Column(name = "player_id")
     private Long id;
 

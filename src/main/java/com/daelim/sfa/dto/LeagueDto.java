@@ -1,7 +1,7 @@
 package com.daelim.sfa.dto;
 
 import com.daelim.sfa.domain.League;
-import jakarta.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 

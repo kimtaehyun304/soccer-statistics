@@ -31,9 +31,7 @@ public class TeamApiController {
 
     private final TeamRepository teamRepository;
     private final TeamStatisticsRepository teamStatisticsRepository;
-    private final LineupRepository lineupRepository;
     private final GameFixtureRepository gameFixtureRepository;
-    private final LeagueRepository leagueRepository;
 
     @Operation(summary = "한 팀의 정보, 통계, 포메이션 ,경기 전적 조회", description = "팀 PK 로 검색합니다")
     @Parameter(name = "teamId", description = "", example = "33")

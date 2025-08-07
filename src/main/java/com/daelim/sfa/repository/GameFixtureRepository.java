@@ -1,7 +1,6 @@
 package com.daelim.sfa.repository;
 
 import com.daelim.sfa.domain.game.GameFixture;
-import com.daelim.sfa.domain.team.Team;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

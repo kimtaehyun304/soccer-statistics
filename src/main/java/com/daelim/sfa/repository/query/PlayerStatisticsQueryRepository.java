@@ -1,13 +1,11 @@
 package com.daelim.sfa.repository.query;
 
-import com.daelim.sfa.domain.player.PlayerStatistics;
-import com.daelim.sfa.domain.team.TeamStatistics;
+
 import com.daelim.sfa.dto.ranking.PlayerRankingDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -55,7 +53,7 @@ public class PlayerStatisticsQueryRepository {
         List<PlayerRankingDto> PlayerRankings;
 
         if (leagueId == null){
-            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.id, p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, ROUND(ps.rating, 2)) " +
+            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.id, p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, CAST(ROUND(ps.rating, 2) AS DOUBLE)) " +
                             "from PlayerStatistics ps join ps.player p " +
                             "where ps.season =:leagueSeason " +
                             "order by (ps.rating) desc", PlayerRankingDto.class)
@@ -63,7 +61,7 @@ public class PlayerStatisticsQueryRepository {
                     .setMaxResults(100)
                     .getResultList();
         }else {
-            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.id, p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, ROUND(ps.rating, 2)) " +
+            PlayerRankings = em.createQuery("select distinct new com.daelim.sfa.dto.ranking.PlayerRankingDto(p.id, p.photo ,CONCAT(p.firstName, ' ', p.lastName), ps.position, CAST(ROUND(ps.rating, 2) AS DOUBLE)) " +
                             "from PlayerStatistics ps join ps.player p " +
                             "where ps.league.id = :leagueId and ps.season =:leagueSeason " +
                             "order by (ps.rating) desc", PlayerRankingDto.class)

@@ -1,7 +1,7 @@
 package com.daelim.sfa.repository.player;
 
 import com.daelim.sfa.domain.player.Player;
-import com.daelim.sfa.domain.team.Team;
+
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

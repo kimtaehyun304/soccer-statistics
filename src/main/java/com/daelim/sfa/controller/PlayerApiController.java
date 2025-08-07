@@ -36,7 +36,6 @@ public class PlayerApiController {
     @GetMapping("/api/players/{playerId}")
     public Object findPlayer(@PathVariable Long playerId, @ModelAttribute LeagueIdSeasonDto leagueIdSeasonDto){
         Player player = playerRepository.findById(playerId);
-        //Player player = playerRepository.findWithStatisticsByPlayerId(playerId);
 
         if(player == null)
             return new ResponseEntity<>("조건에 맞는 검색 결과가 없습니다", HttpStatus.CONFLICT);

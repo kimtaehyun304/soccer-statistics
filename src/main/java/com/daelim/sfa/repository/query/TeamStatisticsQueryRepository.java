@@ -1,6 +1,5 @@
 package com.daelim.sfa.repository.query;
 
-import com.daelim.sfa.dto.ranking.PlayerRankingDto;
 import com.daelim.sfa.dto.ranking.TeamRankingDto;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ public class TeamStatisticsQueryRepository {
     private final EntityManager em;
 
     public List<TeamRankingDto> findAllByLeagueNameAndLeagueSeason(Long leagueId, int leagueSeason) {
-        List<TeamRankingDto> teamRankings = new ArrayList<>();
+        List<TeamRankingDto> teamRankings;
 
         if (leagueId == null) {
             //teamRankings = em.createQuery("select new com.daelim.sfa.dto.ranking.TeamRankingDto(t.logo, t.name, ts.goals.forTotal, ts.goals.againstTotal, ts.fixtures.wins, ts.fixtures.losses, CONCAT(TRUNCATE(ts.fixtures.wins*100/ts.fixtures.played, 0), '%') ) " +

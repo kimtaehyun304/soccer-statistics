@@ -9,9 +9,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -26,13 +23,5 @@ public class PlayerService {
         return player.getId();
     }
 
-    public void updateTeamAndPosition(Player player, Team team, Position position) {
-        player.updateTeamAndPosition(team,position);
-    }
 
-    /*
-    public void updateTeamInPlayerId(Long teamId, List<Long> list) {
-        playerRepository.updateTeamInPlayerId(teamId, list);
-    }
-    */
 }
